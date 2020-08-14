@@ -64,11 +64,11 @@ function getCurrPkgInfo(path: string) {
         const map = vMap[name] || {};
         const [main, num] = (version as string).split(sep);
         if (+map[main] > +num) {
-          messages.push(`${name}, 版本: ${version}可升级到${main + sep + map[main]}`);
+          messages.push(`${name}: ${version} > ${main + sep + map[main]}`);
         }
       }
     });
-    vscode.window.showInformationMessage(messages.join("........."), "更新", "不更新").then((d) => {
+    vscode.window.showInformationMessage(messages.join("            "), "更新", "不更新").then((d) => {
       if (d === "更新") {
         updatePkg();
       }
