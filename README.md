@@ -10,4 +10,6 @@
 - "@choicefe/scm-common"
 - "@choicefe/scm-constant"
 
+#### 快捷键 ctrl+ 双击 q, cmd+ 双击 q;
+
 **Enjoy!**

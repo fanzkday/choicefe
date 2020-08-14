@@ -2,7 +2,7 @@
   "name": "ncvn",
   "displayName": "npm-component-version-notification",
   "description": "",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
@@ -15,10 +15,12 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "commands": [],
+    "keybindings": [
       {
-        "command": "",
-        "title": ""
+        "command": "extension.exec",
+        "key": "ctrl+q q",
+        "mac": "cmd+q q"
       }
     ]
   },
