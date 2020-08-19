@@ -93,9 +93,28 @@ function updatePkg() {
   });
 }
 
+function getDependencies() {
+  const map: { [x: string]: boolean } = {};
+  (vscode.workspace.workspaceFolders || []).forEach((folder) => {
+    const path = folder.uri.fsPath;
+    try {
+      const data = require(`${path}/package.json`);
+      Object.keys(data.dependencies).forEach((key: string) => {
+        map[key] = true;
+      });
+    } catch (error) {
+      console.log("error ==>", error);
+    }
+  });
+  return map;
+}
+
 export async function main(path: string) {
-  for (const name of names) {
-    await getData(name);
+  const shouldUpdate = names.some((n) => getDependencies()[n]);
+  if (shouldUpdate) {
+    for (const name of names) {
+      await getData(name);
+    }
+    getCurrPkgInfo(path);
   }
-  getCurrPkgInfo(path);
 }
