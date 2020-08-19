@@ -4,15 +4,8 @@ import { writeFileSync } from "fs";
 
 const sep = "-beta.";
 const base = "http://npm.choicesaas.cn/-/verdaccio/sidebar";
-const names = [
-  "@choicefe/scm-widgets",
-  "@choicefe/scm-permission",
-  "@choicefe/scm-components",
-  "@choicefe/scm-modal",
-  "@choicefe/scm-utils",
-  "@choicefe/scm-common",
-  "@choicefe/scm-constant",
-];
+
+const names = vscode.workspace.getConfiguration("cook").get("component.names") as string[];
 
 async function getData(name: string) {
   return new Promise((resolve) => {

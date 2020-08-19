@@ -2,7 +2,7 @@
   "name": "ncvn",
   "displayName": "npm-component-version-notification",
   "description": "",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
@@ -22,6 +22,31 @@
         "command": "extension.exec",
         "key": "ctrl+q q",
         "mac": "cmd+q q"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "cook",
+        "properties": {
+          "cook.component.names": {
+            "type": "array",
+            "default": [
+              "@choicefe/scm-widgets",
+              "@choicefe/scm-permission",
+              "@choicefe/scm-components",
+              "@choicefe/scm-modal",
+              "@choicefe/scm-utils",
+              "@choicefe/scm-common",
+              "@choicefe/scm-constant"
+            ],
+            "description": "需要提示更新的组件名字"
+          },
+          "cook.interval": {
+            "type": "integer",
+            "default": 600000,
+            "description": "默认十分钟更新一次"
+          }
+        }
       }
     ]
   },
