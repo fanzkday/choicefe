@@ -14,7 +14,7 @@
 
 > 1. 默认 10 分钟同步一次
 
-![预览图](./desc/interval.png)
+![预览图](https://github.com/fanzkday/choicefe/blob/master/desc/interval.png)
 
 > 2. 扩展组件配置
 
@@ -26,6 +26,6 @@
 
 #### 状态栏信息反馈
 
-![预览图](./desc/status.png)
+![预览图](https://github.com/fanzkday/choicefe/blob/master/desc/status.png)
 
 #### 快捷键 Windows: ctrl+q+q; Mac cmd+q+q;
