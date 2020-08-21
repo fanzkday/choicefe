@@ -1,8 +1,8 @@
 {
-  "name": "nc-control",
-  "displayName": "依赖包更新通知",
-  "description": "",
-  "version": "1.2.6",
+  "name": "choicefe",
+  "displayName": "Choicefe Notification",
+  "description": "Choicefe组件更新通知",
+  "version": "1.2.7",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
