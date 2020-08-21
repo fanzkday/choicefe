@@ -2,7 +2,7 @@
   "name": "ncvn",
   "displayName": "npm-component-version-notification",
   "description": "",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
@@ -43,7 +43,14 @@
           },
           "cook.interval": {
             "type": "integer",
-            "default": 600000,
+            "default": 10,
+            "enum": [
+              5,
+              10,
+              15,
+              30,
+              60
+            ],
             "description": "默认十分钟更新一次"
           }
         }

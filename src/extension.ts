@@ -9,10 +9,9 @@ function exec() {
 
 export function activate(context: vscode.ExtensionContext) {
   const interval = vscode.workspace.getConfiguration("cook").get("interval") as number;
-
   exec();
 
-  setInterval(exec, interval || 1000 * 60 * 10);
+  setInterval(exec, (interval || 10) * 1000 * 60);
 
   let disposable = vscode.commands.registerCommand("extension.exec", () => {
     exec();

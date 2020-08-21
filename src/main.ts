@@ -5,6 +5,10 @@ import { writeFileSync } from "fs";
 const sep = "-beta.";
 const base = "http://npm.choicesaas.cn/-/verdaccio/sidebar";
 
+const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 10);
+
+barItem.text = "组件同步中";
+
 const names = vscode.workspace.getConfiguration("cook").get("component.names") as string[];
 
 async function getData(name: string) {
@@ -49,6 +53,7 @@ function parseVersions(versions: string[]): IVersion {
 }
 
 function getCurrPkgInfo(path: string) {
+  barItem.hide();
   const messages: string[] = [];
   try {
     const data = require(`${path}/package.json`);
@@ -112,6 +117,7 @@ function getDependencies() {
 export async function main(path: string) {
   const shouldUpdate = names.some((n) => getDependencies()[n]);
   if (shouldUpdate) {
+    barItem.show();
     for (const name of names) {
       await getData(name);
     }
