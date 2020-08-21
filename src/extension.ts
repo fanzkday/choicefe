@@ -7,6 +7,12 @@ function exec() {
   });
 }
 
+vscode.extensions.onDidChange(() => {
+  const interval = vscode.workspace.getConfiguration("cook").get("interval") as number;
+  exec();
+  setInterval(exec, (interval || 10) * 1000 * 60);
+});
+
 export function activate(context: vscode.ExtensionContext) {
   const interval = vscode.workspace.getConfiguration("cook").get("interval") as number;
   exec();
