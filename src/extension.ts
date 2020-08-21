@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   setInterval(exec, (interval || 10) * 1000 * 60);
 
-  let disposable = vscode.commands.registerCommand("extension.exec", () => {
+  const disposable = vscode.commands.registerCommand("extension.exec", () => {
     exec();
   });
 

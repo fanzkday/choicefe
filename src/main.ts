@@ -5,9 +5,10 @@ import { writeFileSync } from "fs";
 const sep = "-beta.";
 const base = "http://npm.choicesaas.cn/-/verdaccio/sidebar";
 
-const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 10);
+const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, -1000);
 
-barItem.text = "组件同步中";
+barItem.command = "extension.exec";
+barItem.show();
 
 const names = vscode.workspace.getConfiguration("cook").get("component.names") as string[];
 
@@ -53,7 +54,6 @@ function parseVersions(versions: string[]): IVersion {
 }
 
 function getCurrPkgInfo(path: string) {
-  barItem.hide();
   const messages: string[] = [];
   try {
     const data = require(`${path}/package.json`);
@@ -66,11 +66,16 @@ function getCurrPkgInfo(path: string) {
         }
       }
     });
-    vscode.window.showInformationMessage(messages.join("            "), "更新", "不更新").then((d) => {
-      if (d === "更新") {
-        updatePkg();
-      }
-    });
+    if (messages.length > 0) {
+      vscode.window.showInformationMessage(messages.join("            "), "更新", "不更新").then((d) => {
+        if (d === "更新") {
+          updatePkg();
+        }
+        barItem.text = "$(sync) sync package.json";
+      });
+    } else {
+      barItem.text = "$(sync) package.json up date";
+    }
   } catch (error) {
     console.log("error ==>", error);
   }
@@ -117,7 +122,7 @@ function getDependencies() {
 export async function main(path: string) {
   const shouldUpdate = names.some((n) => getDependencies()[n]);
   if (shouldUpdate) {
-    barItem.show();
+    barItem.text = "$(sync~spin) sync package.json";
     for (const name of names) {
       await getData(name);
     }
