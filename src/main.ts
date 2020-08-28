@@ -10,7 +10,7 @@ const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left
 barItem.command = "extension.exec";
 barItem.show();
 
-const names = vscode.workspace.getConfiguration("cook").get("component.names") as string[];
+const names = vscode.workspace.getConfiguration("choicefe").get("components") as string[];
 
 async function getData(name: string) {
   return new Promise((resolve) => {

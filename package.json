@@ -2,7 +2,7 @@
   "name": "choicefe",
   "displayName": "Choicefe Notification",
   "description": "Choicefe组件更新通知",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
@@ -26,9 +26,9 @@
     ],
     "configuration": [
       {
-        "title": "cook",
+        "title": "choicefe",
         "properties": {
-          "cook.component.names": {
+          "choicefe.components": {
             "type": "array",
             "default": [
               "@choicefe/scm-widgets",
@@ -41,17 +41,16 @@
             ],
             "description": "需要提示更新的组件名字"
           },
-          "cook.interval": {
+          "choicefe.interval": {
             "type": "integer",
-            "default": 10,
+            "default": 60,
             "enum": [
-              5,
               10,
-              15,
               30,
-              60
+              60,
+              120
             ],
-            "description": "默认十分钟更新一次"
+            "description": "默认60分钟更新一次"
           }
         }
       }
@@ -69,6 +68,7 @@
     "@types/glob": "^7.1.1",
     "@types/mocha": "^7.0.1",
     "@types/node": "^12.11.7",
+    "@types/socket.io-client": "^1.4.33",
     "@types/vscode": "^1.47.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
@@ -77,5 +77,8 @@
     "mocha": "^7.0.1",
     "typescript": "^3.7.5",
     "vscode-test": "^1.3.0"
+  },
+  "dependencies": {
+    "socket.io-client": "^2.3.0"
   }
 }
