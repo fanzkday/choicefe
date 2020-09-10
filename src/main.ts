@@ -1,9 +1,8 @@
 import * as vscode from "vscode";
-import { get } from "http";
+import { exec } from "child_process";
 import { writeFileSync } from "fs";
 
 const sep = "-beta.";
-const base = "http://npm.choicesaas.cn/-/verdaccio/sidebar";
 
 const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, -1000);
 
@@ -12,34 +11,25 @@ barItem.show();
 
 const names = vscode.workspace.getConfiguration("choicefe").get("components") as string[];
 
-async function getData(name: string) {
-  return new Promise((resolve) => {
-    get(`${base}/${name}`, (res) => {
-      let data = "";
-      res.on("data", (chunk) => {
-        data += chunk;
-      });
-      res.on("end", () => {
-        try {
-          parse(JSON.parse(data.toString()));
-          resolve();
-        } catch (error) {
-          resolve();
-        }
-      });
-    });
-  });
-}
-
 type IVersion = { [x: string]: any };
 
 const vMap: IVersion = {};
 
-function parse(data: { _id: string; versions: any }) {
-  const name = data._id;
-  const versions = Object.keys(data.versions);
-  const m = parseVersions(versions);
-  vMap[name] = m;
+async function getVersion(name: string) {
+  return new Promise((resolve) => {
+    exec(`npm view ${name} versions`, (err, stdout, stderr) => {
+      if (!err && stdout) {
+        try {
+          const versions = JSON.parse(stdout.replace(/\'/g, `"`));
+          const m = parseVersions(versions);
+          vMap[name] = m;
+        } catch (error) {
+          //
+        }
+        resolve();
+      }
+    });
+  });
 }
 
 function parseVersions(versions: string[]): IVersion {
@@ -109,8 +99,8 @@ function getDependencies() {
     const path = folder.uri.fsPath;
     try {
       const data = require(`${path}/package.json`);
-      Object.keys(data.dependencies).forEach((key: string) => {
-        map[key] = true;
+      Object.entries<string>(data.dependencies).forEach(([key, value]) => {
+        map[key] = value.indexOf(sep) > -1;
       });
     } catch (error) {
       console.log("error ==>", error);
@@ -120,11 +110,11 @@ function getDependencies() {
 }
 
 export async function main(path: string) {
-  const shouldUpdate = names.some((n) => getDependencies()[n]);
-  if (shouldUpdate) {
+  const shouldUpdateNames = names.filter((n) => getDependencies()[n]);
+  if (shouldUpdateNames.length) {
     barItem.text = "$(sync~spin) sync package.json";
-    for (const name of names) {
-      await getData(name);
+    for (const name of shouldUpdateNames) {
+      await getVersion(name);
     }
     getCurrPkgInfo(path);
   }
