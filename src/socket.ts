@@ -7,12 +7,8 @@ export function registerNotification(main: () => void) {
     reconnectionDelay: 1000 * 10 * 60,
   });
 
-  io.io.on("update", (data: string) => {
+  io.on("update", (data: string = "") => {
     main();
-    vscode.window.showInformationMessage(data);
-  });
-
-  io.on("disconnect", () => {
-    registerNotification(main);
+    vscode.window.showInformationMessage(data.split("#").join("      "));
   });
 }
