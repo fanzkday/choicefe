@@ -8,19 +8,14 @@ function exec() {
   });
 }
 
-registerNotification(() => {
-  exec();
-});
-
 export function activate(context: vscode.ExtensionContext) {
   const interval = vscode.workspace.getConfiguration("choicefe").get("interval") as number;
   setInterval(exec, (interval || 60) * 1000 * 60);
 
   exec();
+  registerNotification();
 
-  const disposable = vscode.commands.registerCommand("extension.exec", () => {
-    exec();
-  });
+  const disposable = vscode.commands.registerCommand("extension.exec", exec);
 
   context.subscriptions.push(disposable);
 }
