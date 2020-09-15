@@ -2,7 +2,7 @@
   "name": "choicefe",
   "displayName": "Choicefe Notification",
   "description": "Choicefe组件更新通知",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
