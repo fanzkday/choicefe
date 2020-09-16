@@ -1,4 +1,5 @@
-import { TreeDataProvider, Event, TreeItem, TreeItemCollapsibleState, ProviderResult } from "vscode";
+import * as vscode from "vscode";
+import { TreeDataProvider, TreeItem, TreeItemCollapsibleState, ProviderResult } from "vscode";
 
 interface IDataProvider {
   _id: string;
@@ -9,17 +10,18 @@ function parseDate(dTime: number) {
   if (!dTime) {
     return "--:--:-- --:--";
   }
+  const pad = (str: number) => str.toString().padStart(2, "0");
+
   const dateTime = new Date(dTime);
   const year = dateTime.getFullYear();
   const month = dateTime.getMonth() + 1;
   const date = dateTime.getDate();
   const hour = dateTime.getHours();
   const minute = dateTime.getMinutes();
-  return `${year}-${month}-${date} ${hour}:${minute}`;
+  return `${year}-${pad(month)}-${pad(date)} ${pad(hour)}:${pad(minute)}`;
 }
 
 export class DataProvider implements TreeDataProvider<DataItem> {
-  onDidChangeTreeData?: Event<DataItem | null | undefined> | undefined;
   data: DataItem[];
 
   constructor(list: IDataProvider[]) {

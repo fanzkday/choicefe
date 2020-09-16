@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { main } from "./main";
 import { registerNotification } from "./socket";
+import { getConfigs } from "./utils";
 
 function exec() {
   (vscode.workspace.workspaceFolders || []).forEach((path) => {
@@ -9,11 +10,13 @@ function exec() {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  const interval = vscode.workspace.getConfiguration("choicefe").get("interval") as number;
+  const { interval } = getConfigs();
   setInterval(exec, (interval || 60) * 1000 * 60);
 
   exec();
-  registerNotification();
+
+  const disposables = registerNotification();
+  context.subscriptions.push(...disposables);
 
   const disposable = vscode.commands.registerCommand("extension.exec", exec);
 

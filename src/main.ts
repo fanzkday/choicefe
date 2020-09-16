@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { exec } from "child_process";
 import { writeFileSync } from "fs";
+import { getConfigs } from "./utils";
 
 const sep = "-beta.";
 
@@ -9,7 +10,7 @@ const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left
 barItem.command = "extension.exec";
 barItem.show();
 
-const names = vscode.workspace.getConfiguration("choicefe").get("components") as string[];
+const { names } = getConfigs();
 
 type IVersion = { [x: string]: any };
 

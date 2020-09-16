@@ -1,8 +1,8 @@
 {
   "name": "choicefe",
-  "displayName": "Choicefe Notification",
-  "description": "Choicefe组件更新通知",
-  "version": "1.4.2",
+  "displayName": "Record Notification",
+  "description": "组件更新通知及历史记录",
+  "version": "1.4.3",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
@@ -16,7 +16,22 @@
   "icon": "icon.png",
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [],
+    "commands": [
+      {
+        "command": "TreeViewRecord.refresh",
+        "icon": "$(refresh)",
+        "title": "刷新"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "when": "view == TreeViewRecord",
+          "command": "TreeViewRecord.refresh",
+          "group": "navigation"
+        }
+      ]
+    },
     "keybindings": [
       {
         "command": "extension.exec",
@@ -27,8 +42,8 @@
     "views": {
       "explorer": [
         {
-          "id": "TreeView",
-          "name": "组件发布历史"
+          "id": "TreeViewRecord",
+          "name": "组件发布记录"
         }
       ]
     },
