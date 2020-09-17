@@ -10,8 +10,6 @@ const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left
 barItem.command = "extension.exec";
 barItem.show();
 
-const { names } = getConfigs();
-
 type IVersion = { [x: string]: any };
 
 const vMap: IVersion = {};
@@ -49,7 +47,7 @@ function getCurrPkgInfo(path: string) {
   try {
     const data = require(`${path}/package.json`);
     Object.entries(data.dependencies).forEach(([name, version]) => {
-      if (names.includes(name)) {
+      if (getConfigs().names.includes(name)) {
         const map = vMap[name] || {};
         const [main, num] = (version as string).split(sep);
         if (+map[main] > +num) {
@@ -79,7 +77,7 @@ function updatePkg() {
       const data = require(`${path}/package.json`);
 
       Object.entries(data.dependencies).forEach(([name, version]) => {
-        if (names.includes(name)) {
+        if (getConfigs().names.includes(name)) {
           const map = vMap[name];
           const [main] = (version as string).split(sep);
           if (map && map[main]) {
@@ -111,7 +109,7 @@ function getDependencies() {
 }
 
 export async function main(path: string) {
-  const shouldUpdateNames = names.filter((n) => getDependencies()[n]);
+  const shouldUpdateNames = getConfigs().names.filter((n) => getDependencies()[n]);
   if (shouldUpdateNames.length) {
     barItem.text = "$(sync~spin) sync package.json";
     for (const name of shouldUpdateNames) {
