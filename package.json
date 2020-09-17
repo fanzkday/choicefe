@@ -2,7 +2,7 @@
   "name": "choicefe",
   "displayName": "Record Notification",
   "description": "组件更新通知及历史记录",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
