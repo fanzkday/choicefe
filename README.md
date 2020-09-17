@@ -10,9 +10,9 @@
 - "@choicefe/scm-common"
 - "@choicefe/scm-constant"
 
-#### 支持自定义配置
+#### 自定义配置
 
-- 1. 默认 60 分钟同步一次
+- 1. 同步时间, 默认 60 分钟一次
 
 - 2. 扩展组件配置
 
@@ -21,6 +21,8 @@
   "cook.component.names": ["@choicefe/picker", "@choicefe/select"]
 }
 ```
+
+#### 图片无法预览时, 备用地址(https://choicesoft.yuque.com/bigfe/wiki/pko2lg)
 
 #### 状态栏信息反馈
 
