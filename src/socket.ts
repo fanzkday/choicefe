@@ -20,7 +20,10 @@ export function registerNotification(): vscode.Disposable[] {
   io.emit("get/records", JSON.stringify(getConfigs().names));
 
   io.on("records", (data: []) => {
-    vscode.window.registerTreeDataProvider("TreeViewRecord", new DataProvider(data));
+    vscode.window.createTreeView("TreeViewRecord", {
+      treeDataProvider: new DataProvider(data),
+      showCollapseAll: true,
+    });
   });
 
   const disposable = vscode.commands.registerCommand("TreeViewRecord.refresh", () => {
