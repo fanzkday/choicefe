@@ -1,15 +1,5 @@
 # Record Notification 组件更新通知
 
-#### 默认配置如下组件通知功能
-
-- "@choicefe/scm-widgets"
-- "@choicefe/scm-permission"
-- "@choicefe/scm-components"
-- "@choicefe/scm-modal"
-- "@choicefe/scm-utils"
-- "@choicefe/scm-common"
-- "@choicefe/scm-constant"
-
 #### 自定义配置
 
 - 1. 同步时间, 默认 60 分钟一次
@@ -18,13 +8,14 @@
 
 ```json
 {
-  "cook.component.names": ["@choicefe/picker", "@choicefe/select"]
+  "cook.scope": "@choicefe", // 私域@choicefe下的所有组件
+  "cook.components": ["picker", "select"] // 其他不在私域下的组件, 与私域是"或"关系
 }
 ```
 
 #### 图片无法预览时, 备用地址(https://choicesoft.yuque.com/bigfe/wiki/pko2lg)
 
-#### 状态栏信息反馈
+#### 状态栏信息反馈(点击后同步组件信息)
 
 ![预览图](https://gcook.oss-cn-hangzhou.aliyuncs.com/status.png)
 
@@ -40,4 +31,7 @@
 
 ![预览图](https://gcook.oss-cn-hangzhou.aliyuncs.com/gcook.msg.png)
 
-#### 快捷键 Windows: ctrl+q+q; Mac cmd+q+q;
+#### 快捷键
+
+- Win: Ctrl + Q + Q;
+- Mac: Cmd + Q + Q;

@@ -92,7 +92,7 @@ function updatePkg() {
   });
 }
 
-function getDependencies() {
+export function getDependencies() {
   const map: { [x: string]: boolean } = {};
   (vscode.workspace.workspaceFolders || []).forEach((folder) => {
     const path = folder.uri.fsPath;
@@ -109,7 +109,18 @@ function getDependencies() {
 }
 
 export async function main(path: string) {
-  const shouldUpdateNames = getConfigs().names.filter((n) => getDependencies()[n]);
+  const { scope, names } = getConfigs();
+
+  const shouldUpdateNames = Object.keys(getDependencies()).filter((n) => {
+    if (n.startsWith(scope)) {
+      return true;
+    }
+    if (names.find((name) => name === n)) {
+      return true;
+    }
+    return false;
+  });
+
   if (shouldUpdateNames.length) {
     barItem.text = "$(sync~spin) sync package.json";
     for (const name of shouldUpdateNames) {

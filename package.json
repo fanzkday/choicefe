@@ -2,7 +2,7 @@
   "name": "choicefe",
   "displayName": "Record Notification",
   "description": "组件更新通知及历史记录",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
@@ -51,18 +51,15 @@
       {
         "title": "choicefe",
         "properties": {
+          "choicefe.scope": {
+            "type": "string",
+            "default": "@choicefe",
+            "description": "私域名称, 用于匹配所有私域内的组件"
+          },
           "choicefe.components": {
             "type": "array",
-            "default": [
-              "@choicefe/scm-widgets",
-              "@choicefe/scm-permission",
-              "@choicefe/scm-components",
-              "@choicefe/scm-modal",
-              "@choicefe/scm-utils",
-              "@choicefe/scm-common",
-              "@choicefe/scm-constant"
-            ],
-            "description": "需要提示更新的组件名字"
+            "default": [],
+            "description": "不包含私域前缀的组件"
           },
           "choicefe.interval": {
             "type": "integer",

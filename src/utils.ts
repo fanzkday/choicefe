@@ -1,9 +1,16 @@
 import * as vscode from "vscode";
 
-export function getConfigs(): { interval: number; names: string[] } {
+interface IReturn {
+  interval: number;
+  names: string[];
+  scope: string;
+}
+
+export function getConfigs(): IReturn {
   const choicefe = vscode.workspace.getConfiguration("choicefe");
 
   const interval = choicefe.get("interval") as number;
   const names = choicefe.get("components") as string[];
-  return { interval, names };
+  const scope = choicefe.get("scope") as string;
+  return { interval, names, scope };
 }

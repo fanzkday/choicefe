@@ -13,8 +13,6 @@ export function activate(context: vscode.ExtensionContext) {
   const { interval } = getConfigs();
   setInterval(exec, (interval || 60) * 1000 * 60);
 
-  exec();
-
   const disposables = registerNotification();
   context.subscriptions.push(...disposables);
 
