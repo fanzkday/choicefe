@@ -1,4 +1,3 @@
-import * as vscode from "vscode";
 import { TreeDataProvider, TreeItem, TreeItemCollapsibleState, ProviderResult } from "vscode";
 
 interface IDataProvider {

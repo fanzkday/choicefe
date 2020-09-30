@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { connect } from "socket.io-client";
 import { DataProvider } from "./dataProvider";
 import { getConfigs } from "./utils";
+import { getShouldUpdateNames } from "./main";
 
 export function registerNotification(): vscode.Disposable[] {
   const io = connect("http://office.choicesaas.cn/choicefe", {
@@ -24,8 +25,10 @@ export function registerNotification(): vscode.Disposable[] {
     });
   });
 
+  io.emit("get/records", JSON.stringify(getShouldUpdateNames()));
+
   const disposable = vscode.commands.registerCommand("TreeViewRecord.refresh", () => {
-    io.emit("get/records", JSON.stringify(getConfigs().names));
+    io.emit("get/records", JSON.stringify(getShouldUpdateNames()));
   });
 
   return [disposable];
