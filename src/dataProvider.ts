@@ -27,7 +27,7 @@ export class DataProvider implements TreeDataProvider<DataItem> {
     this.data = list.map((item) => {
       return new DataItem(
         item._id,
-        item.list.reverse().map((row) => {
+        item.list.map((row) => {
           return new DataItem(row.version, [
             new DataItem(`提交人: ${row.author}`),
             new DataItem(`分支: ${row.branch}`),
