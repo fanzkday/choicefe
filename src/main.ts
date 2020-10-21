@@ -47,7 +47,8 @@ function getCurrPkgInfo(path: string) {
   try {
     const data = require(`${path}/package.json`);
     Object.entries(data.dependencies).forEach(([name, version]) => {
-      if (getConfigs().names.includes(name)) {
+      const { scope, names } = getConfigs();
+      if (name.startsWith(scope) || names.includes(name)) {
         const map = vMap[name] || {};
         const [main, num] = (version as string).split(sep);
         if (+map[main] > +num) {
@@ -77,7 +78,8 @@ function updatePkg() {
       const data = require(`${path}/package.json`);
 
       Object.entries(data.dependencies).forEach(([name, version]) => {
-        if (getConfigs().names.includes(name)) {
+        const { scope, names } = getConfigs();
+        if (name.startsWith(scope) || names.includes(name)) {
           const map = vMap[name];
           const [main] = (version as string).split(sep);
           if (map && map[main]) {

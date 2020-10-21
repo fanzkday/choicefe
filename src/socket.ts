@@ -11,9 +11,10 @@ export function registerNotification(): vscode.Disposable[] {
   });
 
   io.on("update", (data: string = "") => {
+    const { scope, names } = getConfigs();
     const [author, name = "", version = "", branch = "", commit = ""] = data.split("#");
 
-    if (getConfigs().names.some((n) => name.includes(n))) {
+    if (name.startsWith(scope) || names.some((n) => name.includes(n))) {
       vscode.window.showInformationMessage(`${name} + ${version}`, `author:${author}`);
     }
   });
