@@ -6,12 +6,25 @@ import { getConfigs } from "./utils";
 function exec() {
   (vscode.workspace.workspaceFolders || []).forEach((path) => {
     main(path.uri.fsPath);
+    const pkg = require(`${path.uri.fsPath}/package.json`);
+    const pluginsNames: string[] | undefined = pkg["vscode-plugins"];
+
+    if (pluginsNames !== undefined) {
+      const extensionNames = vscode.extensions.all.map((ex) => {
+        return ex.packageJSON.displayName?.toLowerCase();
+      });
+
+      const uninstallPlugins = pluginsNames.filter((name) => !extensionNames.includes(name.toLowerCase()));
+
+      if (uninstallPlugins.length) {
+        vscode.window.showInformationMessage(`请安装如下vscode插件: ${uninstallPlugins.concat(";")}`);
+      }
+    }
   });
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  const { interval } = getConfigs();
-  setInterval(exec, (interval || 60) * 1000 * 60);
+  exec();
 
   const disposables = registerNotification();
   context.subscriptions.push(...disposables);

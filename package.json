@@ -2,7 +2,7 @@
   "name": "choicefe",
   "displayName": "Record Notification",
   "description": "组件更新通知及历史记录",
-  "version": "1.4.10",
+  "version": "1.4.11",
   "publisher": "fanzkday",
   "engines": {
     "vscode": "^1.47.0"
@@ -60,17 +60,6 @@
             "type": "array",
             "default": [],
             "description": "不包含私域前缀的组件"
-          },
-          "choicefe.interval": {
-            "type": "integer",
-            "default": 60,
-            "enum": [
-              10,
-              30,
-              60,
-              120
-            ],
-            "description": "默认60分钟更新一次"
           }
         }
       }

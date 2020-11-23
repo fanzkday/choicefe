@@ -2,7 +2,7 @@
 
 #### 自定义配置
 
-- 1. 同步时间, 默认 60 分钟一次
+- 1. ~~同步时间, 默认 60 分钟一次~~(目前修改为插件初始化时, 运行一次)
 
 - 2. 扩展组件配置
 
@@ -11,6 +11,18 @@
   "cook.scope": "@choicefe", // 私域@choicefe下的所有组件
   "cook.components": ["picker", "select"] // 其他不在私域下的组件, 与私域是"或"关系
 }
+```
+
+- 3. 项目依赖的 vscode 插件
+
+```json
+// 项目目录下的package.json
+"vscode-plugins": [
+    "Prettier - Code formatter",
+    "eslint",
+    "tslint",
+    "minapp"
+  ]
 ```
 
 #### 图片无法预览时, 备用地址(https://choicesoft.yuque.com/bigfe/wiki/pko2lg)
