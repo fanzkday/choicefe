@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { main } from "./main";
 import { registerNotification } from "./socket";
-import { getConfigs } from "./utils";
 
 function exec() {
   (vscode.workspace.workspaceFolders || []).forEach((path) => {

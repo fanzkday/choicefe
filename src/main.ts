@@ -61,10 +61,10 @@ function getCurrPkgInfo(path: string) {
         if (d === "更新") {
           updatePkg();
         }
-        barItem.text = "$(sync) sync package.json";
+        barItem.text = "$(sync) 同步package.json";
       });
     } else {
-      barItem.text = "$(sync) package.json up date";
+      barItem.text = "$(sync) package.json已同步";
     }
   } catch (error) {
     console.log("error ==>", error);
@@ -128,7 +128,7 @@ export async function main(path: string) {
   const shouldUpdateNames = getShouldUpdateNames();
 
   if (shouldUpdateNames.length) {
-    barItem.text = "$(sync~spin) sync package.json";
+    barItem.text = "$(sync~spin) package.json同步中";
     for (const name of shouldUpdateNames) {
       await getVersion(name);
     }
